@@ -1,0 +1,128 @@
+$def with (resource)
+$ path = tx.request.uri.path
+$# owner = tx.host.owner
+
+<html>
+<head>
+<meta charset=utf-8>
+<meta name=viewport content="initial-scale=1.0,user-scalable=no,\
+maximum-scale=1,width=device-width">
+<meta name=apple-mobile-web-app-capable content=yes>
+<meta name=apple-mobile-web-app-status-bar-style content=black-translucent>
+<link rel=icon href=/static/goblin.jpg>
+<title>\
+$if "title" in resource:
+    $:resource.title&thinsp;&mdash;&thinsp;\
+Maxwell Joslyn</title>
+
+<link rel=stylesheet href=/static/screen.css media=screen>
+<link rel=stylesheet href=/static/style.css media=screen>
+
+</head>
+
+<body>
+
+
+<article id=content\
+$if "classes" in resource:
+     class="$' '.join(resource.classes)"\
+>
+
+<header>
+$if "title" in resource and getattr(resource, "show_title", True):
+    <h1>$:resource.title</h1>
+</header>
+$:resource
+</article>
+
+$if "aside" in resource:
+    <aside>
+    $:resource.aside()
+    </aside>
+
+<nav>
+<div class=h-card>
+<div>
+<p><a href=/ class="p-name u-url u-uid"><big><strong>Maxwell Joslyn's Test Website</strong></big></a></p>
+<img src="/static/goblin.jpg" >
+$# <p>$tx.host.owner["note"][0]</p>
+</div>
+</div>
+
+<p>
+$for place, url in [("GitHub", "https://github.com/maxwelljoslyn"), ("Email", "mailto:maxwelljoslyn@gmail.com")]:
+    <a rel=me href=$url>$place</a>\
+    $if not loop.last:
+        ,
+</p>
+
+
+
+<!-- 
+     <body>
+     <header class="cluster center">
+     <div class="h-card">
+     <a id="logo" rel="me" class="u-url u-uid" href="https://www.maxwelljoslyn.com">Maxwell Joslyn</a>
+     <a rel="me" href="mailto:maxwelljoslyn@gmail.com"></a>
+     </div>
+     <nav class="cluster">
+     <a href="/index">Home</a>
+     <a href="/about">About</a>
+     <a href="/blog" rel="feed" type="text/html" title="Maxwell's Blog">Blog</a>
+     <a href="/tags">Tags</a>
+     </nav>
+     </header>
+-->
+
+
+<ul>
+$for app_prefix, app_name in [("code", "Code"), ("media", "Media")]:
+    <li>\
+    $if path.startswith(app_prefix):
+        <strong>$app_name</strong>\
+    $else:
+        <a href=/$app_prefix>$app_name</a>\
+    </li>
+</ul>
+</nav>
+
+</body>
+</html>
+
+$#$def render_breadcrumbs(breadcrumbs, separator="&#x25b8;", padding="&ensp;"):
+$#    $ """
+$#    $ Render a `separator` delimited list of linkified `breadcrumbs`.
+$#    $
+$#    $ `breadcrumbs` should be a single tuple that will be read two items at a time:
+$#    $
+$#    $     ("path", "Name", "subpath", "Subname", ...)
+$#    $
+$#    $ """
+$#    $ remaining = int(len(breadcrumbs) / 2)
+$#    $ path = ""
+$#    $for crumb_path, crumb_title in zip(*(breadcrumbs[i::2] for i in (0, 1))):
+$#        $ crumb_path, crumb_icon, crumb_title = str(crumb_path), None, str(crumb_title)
+$#        $if isinstance(crumb_title, tuple):
+$#            $ crumb_icon, crumb_title = crumb_title
+$#        $ path = path + "/" + crumb_path
+$#        $ ups = " ".join(["up"] * remaining)
+$#        $ remaining = remaining - 1
+$#        <span>\
+$#        $if crumb_icon:
+$#            <span class="crumb-icon-$crumb_icon"></span>&thinsp;\
+$#        <a href=$path rel="$ups">$:crumb_title</a>\
+$#        $:padding<span class=crumb-sep>$:separator</span></span>$:padding\
+$#
+$#
+$#
+$#$if path:
+$#<nav class=breadcrumbs>\
+$#    $ parts = path.split("/")
+$#    $ app = parts[0]
+$#    $ breadcrumbs = []
+$#    $if len(parts) > 1:
+$#    $ breadcrumbs += [app, app.capitalize()]
+$#    $if "breadcrumbs" in resource:
+$#    $ breadcrumbs += list(resource["breadcrumbs"])
+$#    $:render_breadcrumbs(breadcrumbs)
+$#</nav>

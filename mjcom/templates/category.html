@@ -1,0 +1,10 @@
+$def with (resources)
+$# var classes = ["h-feed"]
+
+
+<ul>
+$for r in resources:
+    $ url = r.get('url')[1]
+    $ name = r.get('name', ['a note'])[0]
+    <li><a href="$url">$:name</a></li>
+</ul>

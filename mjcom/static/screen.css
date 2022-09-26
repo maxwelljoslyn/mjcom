@@ -1,0 +1,71 @@
+/* body { */
+/*     color: #111; */
+/*     display: grid; */
+/*     grid-template: auto auto / 80% 20%; */
+/*     grid-column-gap: 2em; */
+/*     margin: 2em auto; */
+/*     max-width: 60em; } */
+/* article#content { */
+/*     grid-column: 1; */
+/*     grid-row: 1; } */
+/* body > nav { */
+/*     grid-column: 2; */
+/*     grid-row: 1; } */
+/* .h-card img { */
+/*     border: .0625em solid #ccc; */
+/*     border-radius: 2em; */
+/*     display: inline-block; */
+/*     width: 4em; } */
+/* .h-card > div { */
+/*     display: inline-block; } */
+/* a.p-name { */
+/*     color: #111; */
+/*     font-family: 'M Plus Code Latin', sans-serif; */
+/*     font-size: 1.5em; */
+/*     font-weight: 500; */
+/*     text-decoration: none; } */
+/* .breadcrumbs { */
+/*     font-size: .9em; } */
+/* h1 { */
+/*     color: #444; */
+/*     font-family: 'Princess Sofia'; */
+/*     font-size: 3em; */
+/*     margin: 0; } */
+/* h1 span { */
+/*     font-family: cursive; } */
+/* body > nav .h-card p { */
+/*     color: #555; */
+/*     font-family: sans-serif; */
+/*     font-size: .9em; */
+/*     margin: 0; } */
+/* nav ul { */
+/*     font-family: monospace; */
+/*     list-style: none; */
+/*     padding-left: 0; } */
+/* body > footer { */
+/*     color: #333; */
+/*     grid-column-start: 1; */
+/*     grid-column-end: 3; */
+/*     grid-row: 2; */
+/*     text-align: center; } */
+
+/* pre { */
+/*     overflow-x: auto; */
+/*     white-space: pre-wrap; */
+/*     white-space: -moz-pre-wrap; */
+/*     white-space: -pre-wrap; */
+/*     white-space: -o-pre-wrap; */
+/*     word-wrap: break-word; } */
+
+/* .rotate { */
+/*   animation: rotation 60s infinite linear; */
+/* } */
+
+/* @keyframes rotation { */
+/*   from { */
+/*     transform: rotate(0deg); */
+/*   } */
+/*   to { */
+/*     transform: rotate(359deg); */
+/*   } */
+/* } */

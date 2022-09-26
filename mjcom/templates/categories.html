@@ -1,0 +1,10 @@
+$def with (categories)
+$# var classes = ["h-feed"]
+
+$categories.sort()
+
+<ul>
+$for c in categories:
+    <li>
+        <a href="/categories/$c">$c</a>
+</ul>

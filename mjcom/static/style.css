@@ -1,0 +1,584 @@
+/* @import url("fineprint.css") print; */
+/* @import url("bluish.css") speech; */
+/* @import 'custom.css'; */
+/* @import "common.css" screen; */
+
+
+:root {
+    --measure: 70ch; /* width */
+    --color-light: #eeddaa;
+    --color-dark: #000000;
+    --color-shadow: #ccb;
+    background-color: var(--color-light);
+
+    /* 1rem + half of one vw (1vw = 1% of the screen's width) */
+    font-family: "Arial", sans-serif;
+    font-size: calc(1rem + 0.6vw);
+    --ratio: 1.1;
+    --s-5: calc(var(--s-4) / var(--ratio));
+    --s-4: calc(var(--s-3) / var(--ratio));
+    --s-3: calc(var(--s-2) / var(--ratio));
+    --s-2: calc(var(--s-1) / var(--ratio));
+    --s-1: calc(var(--s0) / var(--ratio));
+    --s0: 1rem;
+    --s1: calc(var(--s0) * var(--ratio));
+    --s2: calc(var(--s1) * var(--ratio));
+    --s3: calc(var(--s2) * var(--ratio));
+    --s4: calc(var(--s3) * var(--ratio));
+    --s5: calc(var(--s4) * var(--ratio));
+
+    --border-thin: 0.1rem;
+
+    color: var(--color-dark);
+
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    max-width: var(--measure);
+}
+
+iframe {
+  max-width: 100%; /* stop overflow of youtube embeds */
+}
+
+html,
+body,
+div,
+header,
+nav,
+main,
+footer {
+    max-width: 100%;
+}
+
+h1 {
+    font-size: var(--s5);
+    color: var(--color-dark);
+}
+
+h1 a {
+    color: var(--color-dark);
+}
+
+h2 {
+    font-size: var(--s3);
+}
+
+h3 {
+    font-size: var(--s1);
+    text-decoration: underline;
+    font-weight: normal;
+}
+
+.box {
+    padding: var(--s-2);
+    border: var(--border-thin) solid;
+    color: var(--color-dark);
+    background-color: var(--color-light);
+}
+
+.box * {
+    color: inherit;
+}
+
+.box .invert {
+    color: var(--color-light);
+    background-color: var(--color-dark);
+}
+
+
+.cluster {
+    --space: 1rem;
+    overflow: hidden;
+}
+
+.cluster > * {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin: calc(var(--space) / 2 * -1);
+}
+
+blockquote {
+    padding: 4px;
+    margin: 0px;
+    /* so that in a list of blockquotes, each one is spaced from the others */
+    margin-bottom: 1%;
+    border: solid 1px var(--color-shadow);
+    background-color: #eee;
+
+    /* /\* if the fit-content attributes aren't supported *\/ */
+    width: auto;
+    /* /\*several names for fit-content *\/ */
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: -webkit-fill-available;
+    width: fit-content;
+}
+
+p {
+    text-align: justify;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+
+    margin: 1rem;
+    margin-left: 0rem;
+    margin-right: 0rem;
+}
+
+
+
+blockquote p {
+    padding: 4px;
+    /* prevent first paragraph of blockquote from being indented downward overmuch */
+    margin: 0px 4px 1% 4px;
+}
+
+blockquote pre {
+    padding: 4px;
+    margin: 0px;
+}
+
+.shadow {
+
+}
+
+.cluster > * > * {
+    margin: calc(var(--space) / 2);
+}
+
+.center {
+    box-sizing: content-box;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: var(--measure);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hayleybloo {
+    color: cornflowerblue;
+}
+
+#logo {
+    font-size: var(--s3);
+}
+
+nav > * {
+    font-size: var(--s2);
+}
+
+header a {
+    color: var(--color-dark);
+}
+
+a {
+    /* no underlines on links */
+    text-decoration: none;
+}
+
+pre {
+    display: block;
+    font-family: inherit;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.poemsep {
+    text-decoration: underline;
+}
+
+.poem {
+    padding: 4px;
+    margin: 4px;
+}
+
+.poem-container {
+    /* /\* if the fit-content attributes aren't supported *\/ */
+    width: auto;
+    /* /\*several names for fit-content *\/ */
+    width: -moz-fit-content;
+    width: -webkit-fit-content;
+    width: -webkit-fill-available;
+    width: fit-content;
+
+    background-color: #fbd383;
+    border: solid 1px var(--color-shadow);
+}
+
+/* Used for foreign words in running text (including English words, if discussing linguistics.) See "Books" for examples.*/
+.foreign {
+    font-style: italic;
+    background-color: pink;
+}
+
+.muted {
+    font-size: var(--s-1);
+    font-style: italic;
+}
+
+code {
+    background-color: #d9cec2;
+}
+
+/* "pay attention" */
+.attn {
+    font-size: var(--s2);
+    text-transform: uppercase;
+}
+
+.art-title {
+    /* todo: if I include an .art-title (or .foreign) element inside a .center element
+why are there line breaks before and after the .art-title element?
+I use .art-title on spans, and I thought that spans were inline elements
+
+perhaps it has to do with some aspect of .center
+such as centering its contents
+which fucks with the pre text
+   */
+    font-style: italic;
+}
+
+mark {
+    background-color: #c7e1eb;
+}
+
+.wip, .warn {
+    color: #d72638;
+}
+
+div.h-card > a[href="mailto:maxwelljoslyn@gmail.com"] {
+    margin: 0;
+}
+
+/* classical chinese in vertical style */
+.ccvert {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+figcaption {
+    font-style: italic;
+    border: var(--border-thin) solid;
+    padding: var(--s-3);
+    margin-top: var(--s-4);
+}
+
+.tilt {
+    transition: 0.5s;
+}
+
+.tilt:hover {
+    transform: rotate(2.5deg);
+}
+
+
+/* aside :first-child { */
+/*     margin-top: 0; */
+/* } */
+
+/* aside :last-child { */
+/*     margin-bottom: 0; */
+/* } */
+
+aside {
+    margin: 1rem 0;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    background-color: rgba(0,0,0,0.03125);
+    border-left: 0.25rem solid rgba(0,0,0,0.25);
+    /* border-radius: 0.25rem; /\* rounded *\/ */
+}
+
+.muted em {
+    font-style: normal;
+}
+
+@keyframes pulse {
+    /* an example animaton created with @keyframes
+    /* https://github.com/jbranchaud/til/blob/master/css/animate-smoothly-between-two-background-colors.md     */
+    0% {
+        background-color: red;
+    }
+    50% {
+        background-color: blue;
+    }
+    100% {
+        background-color: red;
+    }
+}
+
+.pulsing {
+    animation: pulse 4s infinite;
+}
+
+.bigclick {
+    font-size: var(--s1);
+}
+
+li + li {
+    margin-top: 0.5rem;
+}
+
+ul.tight {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    list-style-type: none;
+}
+
+img {
+    /* so images don't overflow */
+    max-width: 100%;
+}
+
+#testimonials.foo::after {
+    content: "(口碑)";
+}
+
+.callout {
+    border-radius: 0.3em;
+    border-top: darkgreen .1em solid;
+}
+
+.callout:hover {
+    background-color: #22884422;
+}
+
+/* * { */
+/* for making sure HTML layout is not janky  */
+/*     border: 2px dotted black; */
+/* } */
+
+/* use this to put quotes around poetry titles? */
+/* div::after { */
+/*   content: "hi"; */
+/* } */
+
+/* <div> */
+/*   <!-- Rest of stuff inside the div --> */
+/*   hi */
+/* </div> */
+
+/* a:not(.button):not(.linkOnDomain):focus, a:not(.button):not(.linkOnDomain):hover { */
+/*     background-color: linear-gradient(to right,red,blue); */
+/* } */
+
+.explain{background-color:#ffb66f;}
+
+s {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+}
+
+.sic {
+    font-style: italic;
+}
+
+.status.symbol::after {
+    content: "";
+}
+
+.new-v1::after {
+    content: "new";
+    font-size: calc(var(--s-3));
+    background: #AA0044;
+    color: white;
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+}
+
+
+
+.new::after {
+    content: "!";
+    font-size: calc(var(--s-2));
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+    color: black;
+    border-color: black;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    display: inline-block;
+
+    --egg-width: calc(var(--s-) * 1.3);
+    --egg-height: calc(1.42 * var(--egg-width));
+    width: var(--egg-width);
+
+    height: var(--egg-height);
+    background-color: #f2c387;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.smallcaps {
+    font-style: smallcaps;
+}
+
+
+
+.internal-1 {
+    background-color: #aaE7F2;
+}
+
+
+.internal-2 {
+    background-color: #bbF5FF;
+}
+
+
+.internal-3 {
+    background-color: #ccF7FF;
+}
+
+
+.internal-4 {
+    background-color: #ddF9FF;
+}
+
+.drongo {
+    font-style: italic;
+}
+
+
+.brag.tech::after {
+    content: "tech";
+    font-size: calc(var(--s-3));
+    background: #AA0044;
+    color: white;
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+}
+
+.brag.social::after {
+    content: "community";
+    font-size: calc(var(--s-3));
+    background: orange;
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+}
+
+.brag.game::after {
+    content: "game";
+    font-size: calc(var(--s-3));
+    color: white;
+    background: magenta;
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+}
+
+
+.brag.ling::after {
+    content: "ling";
+    font-size: calc(var(--s-3));
+    background: pink;
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+}
+
+
+.brag.media::after {
+    content: "media";
+    font-size: calc(var(--s-3));
+    background: blue;
+    color: white;
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+}
+
+.brag.pro::after {
+    content: "pro";
+        font-size: calc(var(--s-3));
+    background: green;
+    color: white;
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+}
+.brag.hobby::after {
+    content: "hobby";
+        font-size: calc(var(--s-3));
+    background: green;
+    color: white;
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+}
+
+.brag.vol::after {
+    content: "volunteer";
+    font-size: calc(var(--s-3));
+    background: green;
+    color: white;
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+}
+
+.brag.chin::after {
+    content: "chinese";
+    font-size: calc(var(--s-3));
+    background: black;
+    color: white;
+    box-shadow: 0 0 1px black;
+    margin: .33em;
+    padding: .1em;
+}
+
+/* p { */
+/*     text-indent: var(--s4); */
+/* } */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/:not#Description */
+/* https://css-tricks.com/almanac/selectors/f/first-line/ */
+/* p + p { */
+/* } */
+
+#mc_embed_signup .button {
+  background-color: green;
+}
+
+.emote {
+  font-style: italic;
+}
+
+.emote::before {
+  font-style: italic;
+  content: "*";
+}
+
+.emote::after {
+  font-style: italic;
+  content: "*";
+}
+
+.proclamation-start {
+  text-transform: uppercase;
+}
+
+details > summary {
+  cursor: pointer;
+}
+
+details > summary::after {
+  content: " (click to open)";
+  /* same as .muted */
+  font-size: var(--s-1);
+  font-style: italic;
+}
+
+details[open] > summary::after {
+  content: " (click to close)";
+  /* same as .muted */
+  font-size: var(--s-1);
+  font-style: italic;
+}

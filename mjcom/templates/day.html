@@ -1,0 +1,15 @@
+$def with (year, month, day, posts)
+$var title: Posts from $month_name[month] $day, $year
+
+$for post in posts:
+    $ post_url = post["url"][0]
+    $ name = post.get('name', ['<i>a note</i>'])[0]
+    <ul>
+    <li><a href="$post_url">$:name</a></li>
+    </ul>
+    $if tx.user.is_owner:
+        <form method=post>
+        <input type=hidden name=action value=delete>
+        <input type=hidden name=url value=$post_url>
+        <button>Delete</button>
+        </form>

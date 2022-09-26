@@ -1,0 +1,112 @@
+$def with (permalink, entry)
+$var classes = ["h-entry"]
+
+$def category_link(text):
+    $ return f"<a href='/categories/{text}'>{text}</a>"
+
+$if entry.get("published"):
+    $ published = entry.get("published")[0]
+    <p>Published on $month_name[published.month] $published.day, $published.year</p>
+$if entry.get("updated"):
+    $ updated = entry.get("updated")[0]
+    <p>Last updated on $month_name[updated.month] $updated.day, $updated.year</p>
+$if entry.get("category"):
+    $ category = entry.get("category")
+    <p>Categories: $:andlist([category_link(c) for c in category], ", ")</p>
+
+$for key, val in entry.items():
+    $if key == 'content':
+        $ pass
+    $else:
+        <p>$key: $val</p>
+
+
+<a class=u-author href=/></a>
+<link rel=alternate type=application/diamond-types href=${permalink}.dt
+      title="versioned history of this document"/>
+
+$# note: some of my old stuff has an explicit "type" key on its resource, e.g. letters to h0p3 with type "letter"
+$ type = discover_post_type(entry)
+
+$if type == "note":
+    <div id=previewContent>
+        <div class=e-content>$:post_mkdn(entry["content"][0])</div>
+    </div>
+$elif type == "article":
+    $var title = entry["name"][0]
+    $# <h2 class=p-name>$entry["name"][0]</h2>
+    <div class=e-content>$:post_mkdn(entry["content"][0]['html'])</div>
+$elif type == "weight":
+    <h2 class=p-summary>$entry["summary"][0]</h2>
+    $ weight = entry["weight"][0]
+    <p class="p-weight h-measure"><span class=p-num>$weight["num"]</span>
+    <span class=p-unit>$weight["unit"]</span></p>
+$elif type == "bookmark":
+    $ bookmark = entry["bookmark-of"][0]
+    $var title: Bookmarked $bookmark
+    <p><big>Bookmarked <a class=u-bookmark-of
+    href=$bookmark>$bookmark</a></big></p>
+$elif type == "like":
+    $ like = entry["like-of"][0]
+    $var title: Liked $like
+    <p class=p-name><big class="h-cite u-like-of">Liked
+    <a class="p-name u-url" href=$like>$like</a></big></p>
+$elif type == "rsvp":
+    $ in_reply_to = entry["in-reply-to"][0]
+    <p>RSVP <strong class=p-rsvp>$entry["rsvp"][0]</strong> to
+    <a class=u-in-reply-to href=$in_reply_to>$in_reply_to</a></p>
+
+$#    <script type=module>
+$#     import { load, getBrowser, diamondMonaco, MicropubClient } from '/static/web.js'
+
+     $# const previewMarkdown = content => {
+         $# // XXX name = document.querySelector('#name input[type=text]').value
+         $# // XXX previewName.innerHTML = `<h1>$${name}</h1>`
+         $# if (content == '') {
+             $# previewContent.innerHTML = ''
+             $# return
+         $# }
+         $# let body = new FormData()
+         $# body.append('content', content)
+         $# fetch(
+             $# '/editor/preview/markdown',
+             $# {
+                 $# method: 'POST',
+                 $# body: body
+             $# }
+         $# ).then(response => {
+             $# if (response.status === 200) {
+                 $# return response.json().then(data => {
+                     $# previewContent.innerHTML = data['content']
+                 $# })
+             $# }
+         $# })
+     $# }
+$#
+     $# var frequency = 1.5;  // seconds
+     $# var count = 0;
+     $# var clean = true;
+     $# const tick = () => {
+         $# setTimeout(() => {
+             $# if (count++ > frequency * 10 && !clean)
+                 $# updatePreview();
+             $# tick();
+         $# }, 100);
+     $# }
+     $# tick();
+     $# const updatePreview = () => {
+         $# clean = false;
+         $# if (count > frequency * 10) {
+             $# previewMarkdown(monaco.getValue());
+             $# clean = true;
+             $# count = 0;
+         $# }
+     $# }
+$#
+     $# const monaco = diamondMonaco(
+         $# '$permalink', editor, editorStatus, connection, version,
+         $# {},
+         $# '$(tx.user.session["uid"][0] if tx.user.session else tx.user.ip)'
+     $# )
+     $# monaco.onDidChangeModelContent(updatePreview)
+    $# </script>

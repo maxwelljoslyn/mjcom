@@ -1,0 +1,87 @@
+$def with (feed)
+
+$#var classes = ["h-feed"]
+
+$#<style>
+$##content img {
+$#  width: 100%; }
+$#</style>
+
+$#<ul>
+$#$for item in feed:
+    $#$ post_url = item["url"][0]
+    $#$ name = item.get('name', ['<i>a note</i>'])[0]
+    $#<li><a href="$post_url">$:name</a></li>
+$#</ul>
+
+
+    <article class="center h-entry">
+
+
+        <a rel="author" class="p-author" href="https://www.maxwelljoslyn.com" style="display: none;">Maxwell Joslyn</a>
+
+
+        <div id="article-body" class="e-content ">
+
+            <section id="greeting">
+                <p>I am...</p>
+                <ul>
+                    <li>studying for an MS in Computational Media at UC Santa Cruz</li>
+                    <li>seeking to heal a seemingly-undiagnosable injury in my left hand</li>
+                    <li>building out this website as the hub of my writing, coding, and D&amp;D-running pipeline</li>
+                </ul>
+                <p>If you're in Santa Cruz, drop me a line!</p>
+            </section>
+            <section>
+                <h2>Greatest Hits</h2>
+                <p><strong><span class="drongo">The Drongo</span></strong> <a class="muted" href="/thedrongo">see all</a></p>
+                <p>Twelve interviews with rather unusual people, including <a href="/thedrongo/interviews/chris-stasse">an itinerant Chinese scholar</a>, <a href="/thedrongo/interviews/ryan-wright">a game studies researcher</a>, and <a href="/thedrongo/interviews/carla-paloma">a boat-dwelling ceramics artist</a>.</p>
+                <p><strong>Chinese</strong> <a class="muted" href="/tags/chinese">see all</a></p>
+                <p><a href="https://www.maxwelljoslyn.com/rare-syllables">The Rarest Mandarin Syllables</a> / "<a href="/maku-xiansheng">Mr. Breeches</a>" / "<a href="tieniu-he-bingya">Iron Bull and Sick Duck</a>"</p>
+                <p><strong>Poetry &amp; Parody</strong> <span class="muted"><a href="/poems">see all</a></span></p>
+                <p>"<a href="/poems/huge-katana">Huge Katana</a>" / "<a href="/poems/man-from-h0p3">The Man from H.0.P.3.</a>" / "<a href="/poems/almost-elfland">Almost Elfland</a>" / "<a href="/poems/higher-flight">Higher Flight</a>"</p>
+                <p><strong>Gaming</strong></p>
+                <p>Play <a href="/ryanquest">Ryan Quest</a></p>
+                <p><strong>What I'm Reading</strong></p>
+                <p><a href="/books">Books</a> / <a href="/favorite-poems">Poems</a> / <a href="/links">Links</a></p>
+            </section>
+
+
+        </div>
+    </article>
+
+    <div class="center" id="webmentions"></div>
+
+    <script data-goatcounter="https://maxwelljoslyn.goatcounter.com/count" async="" src="https://gc.zgo.at/count.js"></script>
+    <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0107/0720.js" async="async"></script>
+
+
+</body>
+
+$#$for item in feed:
+$#    $ type = item["type"][0]
+$#    <section class=h-$type>
+    $#    $if type == "entry":
+    $#        $ entry = item
+    $#        $if "rsvp" in entry:
+    $#            $ in_reply_to = entry["in-reply-to"][0]
+    $#            <p>RSVP <strong class=p-rsvp>$entry["rsvp"][0]</strong> to
+    $#            <a class=u-in-reply-to href=$in_reply_to>$in_reply_to</a></p>
+    $#        $elif "photo" in entry:
+    $#            <div><img class=u-photo src=$entry["photo"][0]></div>
+    $#            <div>$entry["summary"][0]</div>
+    $#        $elif "content" in entry:
+    $#            <div class=p-content>$entry["content"][0]</div>
+    $#        $elif "like-of" in entry:
+    $#            $ like_of = entry["like-of"][0]
+    $#            <div>Liked <a class=u-like-of href=$like_of>$like_of</a></div>
+    $#        $else:
+    $#            <div>$entry</div>
+    $#    $elif type == "project":
+    $#        $ project = item
+    $#        <div>Created project <code class=p-name>$project["name"][0]</code></div>
+    $#    $ published = item['published'][0]
+    $#    <p><small><a class=u-url href=$item["url"][0]><time class=dt-published
+                                                              $#    title="$published" datetime="$published">$published.diff_for_humans()</time>\
+    $#    </a></small></p>
+    $#    </section>

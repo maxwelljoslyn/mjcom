@@ -1,0 +1,42 @@
+.whostyle .proclamation-start {
+	text-transform: uppercase;
+}	
+
+details > summary .whostyle {
+  cursor: pointer;
+}
+
+details > summary::after .whostyle {
+  content: " (click to open)";
+  /* same as .muted */
+  font-size: var(--s-1);
+  font-style: italic;
+}
+
+details[open] > summary::after .whostyle {
+  content: " (click to close)";
+  /* same as .muted */
+  font-size: var(--s-1);
+  font-style: italic;
+}
+.whostyle .muted {
+    font-size: var(--s-1);
+    font-style: italic;
+}
+
+.whostyle .muted em {
+    font-style: normal;
+}
+
+.whostyle * {
+    background-color: #eeddaa;
+}
+
+.whostyle .hayleybloo {
+    color: cornflowerblue;
+}
+
+.whostyle a {
+    /* no underlines on links */
+    text-decoration: none;
+}
