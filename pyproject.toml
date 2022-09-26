@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "mjcom"
+version = "0.1.0"
+description = ""
+authors = ["Maxwell Joslyn <maxwelljoslyn@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9,<3.11"
+understory = "^0.0"
+understory-owner = "^0.0"
+understory-code = "^0.0"
+understory-auth = "^0.0"
+understory-media = "^0.0"
+understory-posts = "^0.0"
+understory-editor = "^0.0"
+understory-data = "^0.0"
+micropub = "^0.0"
+
+[[tool.poetry.source]]
+name = "main"
+url = "https://ragt.ag/code/_pypi"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
