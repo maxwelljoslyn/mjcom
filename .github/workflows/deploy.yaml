@@ -1,0 +1,34 @@
+name: test-and-deploy
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy Code to Production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Out Code # TODO do I even need to check out the code if I'm doing `git pull` on the server?
+        uses: actions/checkout@v3
+      - name: Add SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          name: id_rsa
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+          if_key_exists: replace
+      - name: Copy Code to Server and Restart Gunicorn
+        uses: appleboy/ssh-action@master
+        with:
+          host: maxwelljoslyn.com
+          username: maxwell
+          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            whoami
+            # cd /home/maxwell/mjcom
+            # # ./stop-gunicorn.sh
+            # git pull origin master
+            # # ./start-gunicorn.sh
