@@ -174,9 +174,9 @@ class Day:
 # TODO reverse engineer entry template from mxjn.me
 # TODO reverse engineer homepage nav from mxjn.me
 # TODO reverse engineer poem template from mxjn.me
-
-# NICE
+# TODO varying redirects like /td/interview/xyz (no s on interviews), /poem/xyz -> /poems/xyz, etc
+# LATER
+# TODO Fix SLC image links in individual posts and in the (current version of) the SLC main page ; thereafter, don't display individual SLC entries in blog/feed?
 # TODO 0th entry in url list is y/m/d/trailer; others are redirected  rel=canonical on angelo y/m/d/id links to old link, if present
 # TODO implement app.view.post_not_found()
-# LATER
 # TODO def has_nicelink? if len(url) > 1 and ... uh ... how do I distinguish nicelinks from US default links from "this used to be the path to this post but there's a new one now; this OLD path shoud redirect?!" e.g. if url = ['y/m/d/id', 'old/nice/path', 'new/new/path'] ... can redirect function handle all of those easily?
