@@ -1,7 +1,11 @@
-cd /home/maxwell/mjcom &&
-    # cp lockfile lockfile.old &&
-    git pull origin master &&
-    # diff fresh lockfile and lockfile.old; if diff, poetry update &&
-    # rm lockfile.old &&
-    stop-gunicorn.sh &&
-    start-gunicorn.sh &
+# cd /home/maxwell/mjcom &&
+#     # cp lockfile lockfile.old &&
+#     git pull origin master &&
+# NOT poetry update -- poetry install prioritizes the exact versions given in poetry.lock if that file exists
+#     # diff fresh lockfile and lockfile.old
+    # if diff, poetry install &&
+#     # rm lockfile.old &&
+#     stop-gunicorn.sh &&
+#     start-gunicorn.sh &
+
+cd /home/maxwell/mjcom && git pull origin master && stop-gunicorn.sh && start-gunicorn.sh &
