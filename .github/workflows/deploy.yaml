@@ -19,12 +19,21 @@ jobs:
           name: id_rsa
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
           if_key_exists: replace
-      - name: Copy Code to Server and Restart Gunicorn
+      - name: Copy Code to Server
         uses: appleboy/ssh-action@master
         with:
           host: maxwelljoslyn.com
           username: maxwell
           key: ${{ secrets.SSH_KEY }}
-          # script: cd /home/maxwell/mjcom; git pull origin master; /home/maxwell/mjcom/stop-gunicorn.sh && ./start-gunicorn.sh &
-          script: /home/maxwell/mjcom/update-code-and-restart.sh
+          script: |
+            cd /home/maxwell/mjcom
+            git pull origin master
+      - name: Restart Gunicorn
+        uses: appleboy/ssh-action@master
+        with:
+          host: maxwelljoslyn.com
+          username: maxwell
+          key: ${{ secrets.SSH_KEY }}
           script_stop: True
+          script: |
+            /home/maxwell/mjcom/stop-gunicorn.sh && run("/home/maxwell/mjcom/start-gunicorn.sh &")
