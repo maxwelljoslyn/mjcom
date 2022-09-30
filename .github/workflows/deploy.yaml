@@ -25,4 +25,6 @@ jobs:
           host: maxwelljoslyn.com
           username: maxwell
           key: ${{ secrets.SSH_KEY }}
-          script: cd /home/maxwell/mjcom && git pull origin master && ./stop-gunicorn.sh && ./start-gunicorn.sh &
+          script: |
+            cd /home/maxwell/mjcom && git pull origin master
+            ./stop-gunicorn.sh && ./start-gunicorn.sh &
