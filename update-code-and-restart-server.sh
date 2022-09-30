@@ -7,5 +7,3 @@
 #     # rm lockfile.old &&
 #     stop-gunicorn.sh &&
 #     start-gunicorn.sh &
-
-cd /home/maxwell/mjcom && git pull origin master && stop-gunicorn.sh && start-gunicorn.sh &
