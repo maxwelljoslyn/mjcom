@@ -27,4 +27,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           # script: cd /home/maxwell/mjcom; git pull origin master; /home/maxwell/mjcom/stop-gunicorn.sh && ./start-gunicorn.sh &
           script: /home/maxwell/mjcom/update-code-and-restart.sh
-          script_error: True
+          script_stop: True
