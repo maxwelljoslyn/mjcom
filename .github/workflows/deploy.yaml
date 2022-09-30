@@ -26,8 +26,7 @@ jobs:
           username: maxwell
           key: ${{ secrets.SSH_KEY }}
           script: |
-            whoami
-            # cd /home/maxwell/mjcom
+            cd /home/maxwell/mjcom
             # # ./stop-gunicorn.sh
-            # git pull origin master
+            git pull origin master
             # # ./start-gunicorn.sh
