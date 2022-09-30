@@ -87,21 +87,22 @@ class Permalink:
         )  # , mentions)
 
 
-@app.control("(categories|category)")
+@app.control("(categories|category|tags)")
 class Categories:
     def get(self):
-        if web.tx.request.uri.path == "category":
+        if web.tx.request.uri.path != "categories":
             # plural is canonical
+            # "tags" is from previous version of site
             raise web.SeeOther("/categories")
         return app.view.categories(
             web.application("understory.posts").model.get_categories()
         )
 
 
-@app.control("(categories|category)/{category}")
+@app.control("(categories|category|tags|tag)/{category}")
 class Category:
     def get(self, category):
-        if web.tx.request.uri.path.startswith("category"):
+        if not web.tx.request.uri.path.startswith("category"):
             # plural is canonical
             raise web.SeeOther(f"/categories/{category}")
         return app.view.category(
@@ -168,6 +169,7 @@ class Day:
 # DONE fix / remove breadcrumbs on month and day pages
 # DONE links on entry.html if X then X for X in published, updated, categories
 # DONE imp category pages using jsoneach approach, similar to old permalink redirect
+# DONE redirect tags -> categories
 # TODO reverse engineer drongo template from mxjn.me
 # TODO reverse engineer entry template from mxjn.me
 # TODO reverse engineer homepage nav from mxjn.me
