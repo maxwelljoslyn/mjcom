@@ -36,4 +36,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script_stop: True
           script: |
-            /home/maxwell/mjcom/stop-gunicorn.sh && /home/maxwell/mjcom/start-gunicorn.sh &
+            cd /home/maxwell/mjcom
+            stop-gunicorn.sh && start-gunicorn.sh &
