@@ -37,4 +37,4 @@ jobs:
           script_stop: True
           script: |
             cd /home/maxwell/mjcom
-            stop-gunicorn.sh && start-gunicorn.sh &
+            ./stop-gunicorn.sh && ./start-gunicorn.sh &
