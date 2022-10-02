@@ -105,7 +105,8 @@ class Category:
             # plural is canonical; "tags" is from previous version of site
             raise web.SeeOther(f"/categories/{category}")
         return app.view.category(
-            web.application("understory.posts").model.get_posts(categories=[category])
+            category,
+            web.application("understory.posts").model.get_posts(categories=[category]),
         )
 
 

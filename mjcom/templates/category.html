@@ -1,6 +1,12 @@
-$def with (resources)
+$def with (category, resources)
 $# var classes = ["h-feed"]
 
+$ resources = list(resources)
+$ count = len(resources)
+$ verb, noun = ("is", "post") if count == 1 else ("are", "posts")
+
+<p>There $:verb $:count $:noun in the category "$:category".</p>
+<p class="muted"><a href="/categories">See all categories</a></p>
 
 <ul>
 $for r in resources:
