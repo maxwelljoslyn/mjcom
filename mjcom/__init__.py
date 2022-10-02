@@ -102,8 +102,8 @@ class Categories:
 @app.control("(categories|category|tags|tag)/{category}")
 class Category:
     def get(self, category):
-        if not web.tx.request.uri.path.startswith("category"):
             # plural is canonical
+        if not web.tx.request.uri.path.startswith("categories"):
             raise web.SeeOther(f"/categories/{category}")
         return app.view.category(
             web.application("understory.posts").model.get_posts(categories=[category])
