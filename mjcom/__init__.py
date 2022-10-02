@@ -90,9 +90,8 @@ class Permalink:
 @app.control("(categories|category|tags)")
 class Categories:
     def get(self):
-        if web.tx.request.uri.path != "categories":
-            # plural is canonical
-            # "tags" is from previous version of site
+        if not web.tx.request.uri.path.startswith("categories"):
+            # plural is canonical; "tags" is from previous version of site
             raise web.SeeOther("/categories")
         return app.view.categories(
             web.application("understory.posts").model.get_categories()
@@ -102,8 +101,8 @@ class Categories:
 @app.control("(categories|category|tags|tag)/{category}")
 class Category:
     def get(self, category):
-            # plural is canonical
         if not web.tx.request.uri.path.startswith("categories"):
+            # plural is canonical; "tags" is from previous version of site
             raise web.SeeOther(f"/categories/{category}")
         return app.view.category(
             web.application("understory.posts").model.get_posts(categories=[category])
