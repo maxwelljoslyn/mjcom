@@ -20,6 +20,10 @@ micropub = "^0.0"
 name = "main"
 url = "https://ragt.ag/code/_pypi"
 
+
+[tool.poetry.group.dev.dependencies]
+ipython = "^8.5.0"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
