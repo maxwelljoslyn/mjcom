@@ -1,40 +1,40 @@
-name: deploy
-on:
-  push:
-    branches:
-      - master
-  workflow_dispatch:
+# name: deploy
+# on:
+#   push:
+#     branches:
+#       - master
+#   workflow_dispatch:
 
-jobs:
-  deploy:
-    name: Deploy Code to Production
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check Out Code # TODO do I even need to check out the code if I'm doing `git pull` on the server?
-        uses: actions/checkout@v3
-      - name: Add SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-          name: id_rsa
-          known_hosts: ${{ secrets.KNOWN_HOSTS }}
-          if_key_exists: replace
-      - name: Copy Code to Server
-        uses: appleboy/ssh-action@master
-        with:
-          host: maxwelljoslyn.com
-          username: maxwell
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            cd /home/maxwell/mjcom
-            git pull origin master
-      - name: Restart Gunicorn
-        uses: appleboy/ssh-action@master
-        with:
-          host: maxwelljoslyn.com
-          username: maxwell
-          key: ${{ secrets.SSH_KEY }}
-          script_stop: True
-          script: |
-            cd /home/maxwell/mjcom
-            ./stop-gunicorn.sh && ./start-gunicorn.sh &
+# jobs:
+#   deploy:
+#     name: Deploy Code to Production
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Check Out Code # TODO do I even need to check out the code if I'm doing `git pull` on the server?
+#         uses: actions/checkout@v3
+#       - name: Add SSH Key
+#         uses: shimataro/ssh-key-action@v2
+#         with:
+#           key: ${{ secrets.SSH_KEY }}
+#           name: id_rsa
+#           known_hosts: ${{ secrets.KNOWN_HOSTS }}
+#           if_key_exists: replace
+#       - name: Copy Code to Server
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: maxwelljoslyn.com
+#           username: maxwell
+#           key: ${{ secrets.SSH_KEY }}
+#           script: |
+#             cd /home/maxwell/mjcom
+#             git pull origin master
+#       - name: Restart Gunicorn
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: maxwelljoslyn.com
+#           username: maxwell
+#           key: ${{ secrets.SSH_KEY }}
+#           script_stop: True
+#           script: |
+#             cd /home/maxwell/mjcom
+#             ./stop-gunicorn.sh && ./start-gunicorn.sh &
