@@ -2,30 +2,21 @@
 
 import pendulum
 import web
-from understory import auth, code, data, editor, media, owner, posts
-from understory.posts import PostNotFoundError
+import webint_posts
+from webint_posts import PostNotFoundError
 
 app = web.application(
     __name__,
-    db=True,
     args={
         "year": r"\d{4}",
         "month": r"\d{2}",
         "day": r"\d{2}",
         "post_id": web.nb60_re + r"{,4}",
         "slug": r"[\w_-]+",
+        "page": r"[\w-]+",
         "category": r"[\w\d_-]+",
     },
-    mounts=[
-        auth.client.app,
-        auth.server.app,
-        code.app,
-        data.app,
-        editor.app,
-        media.app,
-        owner.app,
-        posts.app,
-    ],
+    mounts=[a[1][0][1] for a in sorted(web.get_apps().items(), key=lambda i: i[1][0])],
 )
 
 
@@ -35,14 +26,14 @@ class Home:
 
     def get(self):
         """Render a profile summary and a reverse chronological feed of public posts."""
-        return app.view.home(posts.app.model.get_posts())
+        return app.view.home(webint_posts.app.model.get_posts())
         # return app.view.index(posts.app.model.read("/consulting"))
 
 
-@posts.app.query
+@webint_posts.app.query
 def get_post_by_old_mjcom_path(db, path):
     try:
-        resource = db.select(
+        return db.select(
             "resources, json_each(resources.resource, '$.url')",
             what="resource, json_extract(resource, '$.url') as url",
             where="json_each.value = ?",
@@ -67,14 +58,14 @@ class Permalink:
             raise web.SeeOther(new_path)
 
         try:
-            resource = web.application(
-                "understory.posts"
-            ).model.get_post_by_old_mjcom_path(web.tx.request.uri.path)["resource"]
+            resource = webint_posts.app.model.get_post_by_old_mjcom_path(
+                web.tx.request.uri.path
+            )["resource"]
         except PostNotFoundError:
             try:
-                resource = web.application("understory.posts").model.read(
-                    web.tx.request.uri.path
-                )["resource"]
+                resource = webint_posts.app.model.read(web.tx.request.uri.path)[
+                    "resource"
+                ]
             except PostNotFoundError:
                 web.header("Content-Type", "text/html")
                 raise web.NotFound(app.view.post_not_found())
@@ -93,9 +84,7 @@ class Categories:
         if not web.tx.request.uri.path.startswith("categories"):
             # plural is canonical; "tags" is from previous version of site
             raise web.SeeOther("/categories")
-        return app.view.categories(
-            web.application("understory.posts").model.get_categories()
-        )
+        return app.view.categories(webint_posts.app.model.get_categories())
 
 
 @app.control("(categories|category|tags|tag)/{category}")
@@ -106,7 +95,7 @@ class Category:
             raise web.SeeOther(f"/categories/{category}")
         return app.view.category(
             category,
-            web.application("understory.posts").model.get_posts(categories=[category]),
+            webint_posts.app.model.get_posts(categories=[category]),
         )
 
 
@@ -120,7 +109,7 @@ class Year:
         dt = pendulum.datetime(year, 1, 1)  # January 1 of year
         previous_year = dt.subtract(years=1)
         next_year = dt.add(years=1)
-        relevant_posts = posts.app.model.get_posts(
+        relevant_posts = webint_posts.app.model.get_posts(
             after=f"{previous_year.year}-12-31", before=f"{next_year.year}-01-01"
         )
         return app.view.year(dt.year, relevant_posts)
@@ -137,7 +126,7 @@ class Month:
         previous_month = dt.subtract(months=1)
         next_month = dt.add(months=1)
 
-        relevant_posts = posts.app.model.get_posts(
+        relevant_posts = webint_posts.app.model.get_posts(
             after=f"{previous_month.year}-{previous_month.month:02d}-{previous_month.last_of('month').day:02d}",
             before=f"{next_month.year}-{next_month.month:02d}-01",
         )
@@ -156,7 +145,7 @@ class Day:
         previous_day = dt.subtract(days=1).set(hour=23, minute=59, second=59)
         next_day = dt.add(days=1)
 
-        relevant_posts = posts.app.model.get_posts(
+        relevant_posts = webint_posts.app.model.get_posts(
             after=f"{previous_day.year}-{previous_day.month:02d}-{previous_day.day:02d}T{previous_day.hour:02d}:{previous_day.minute:02d}:{previous_day.second:02d}",
             before=f"{next_day.year}-{next_day.month:02d}-{next_day.day:02d}",
         )

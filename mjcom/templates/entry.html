@@ -12,14 +12,19 @@ $if entry.get("updated"):
     <p>Last updated on $month_name[updated.month] $updated.day, $updated.year</p>
 $if entry.get("category"):
     $ category = entry.get("category")
-    <p>Categories: $:andlist([category_link(c) for c in category], ", ")</p>
+    $ category.sort()
+    $ links = [category_link(c) for c in category]
+    <p>Categories: $:andlist(links, ", ")</p>
 
+<details open="">
+<summary>Debuggery</summary>
+<p><strong>Some fields hidden!</strong></p>
+<ul>
 $for key, val in entry.items():
-    $if key == 'content':
-        $ pass
-    $else:
-        <p>$key: $val</p>
-
+    $if key not in {'name', 'category', 'published', 'updated', 'content', 'channel', 'slug'}:
+        <li>$key: $val</li>
+<ul>
+</details>
 
 <a class=u-author href=/></a>
 <link rel=alternate type=application/diamond-types href=${permalink}.dt
