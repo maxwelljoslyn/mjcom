@@ -1,0 +1,204 @@
+
+
+
+<!doctype html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8" http-equiv="content-type" content="text/html"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+
+Game Analytics and Procedural Content Generation Questions for a Gaming Company
+
+</title>
+    <link rel="webmention" href="https://webmention.io/www.maxwelljoslyn.com/webmention"/>
+    <link rel="pingback" href="https://webmention.io/www.maxwelljoslyn.com/xmlrpc"/>
+    <link rel="stylesheet" type="text/css" href="/static/new.css">
+    <link rel="whostyle" type="text/css" href="/static/whostyle.css" />
+    <link rel="stylesheet" type="text/css" href="/static/bls.css">
+    <link rel="stylesheet" type="text/css" href="/static/fluffy-stuffy/webmention.css" />
+    <script src="/static/callout.js" async></script>
+    <script src="/static/fluffy-stuffy/webmention.js" async></script>
+    <script src="/static/leader-line.min.js" async></script>
+    <link rel="authorization_endpoint" href="https://indieauth.com/auth">
+    <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
+    <link rel="micropub" href="https://www.maxwelljoslyn.com/micropub">
+    <link rel="microsub" href="https://aperture.p3k.io/microsub/418">
+    <link rel="feed" type="text/html" title="Maxwell's Blog" href="https://www.maxwelljoslyn.com/blog" />
+    <!-- Bigfoot.js for footnotes -->
+    <link rel="stylesheet" type="text/css" href="/static/bigfoot-default.css">
+    <script type="text/javascript" src="/static/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/bigfoot.min.js"></script>
+    <script type="text/javascript" src="/static/run-bigfoot.js"></script>
+    <meta property="og:url" content="https://www.maxwelljoslyn.com/2022/03/14/1"/>
+    <meta property="og:type" content="website" />
+    
+</head>
+
+
+    <body>
+        
+<header class="cluster center">
+    <div class="h-card">
+        <a id="logo" rel="me" class="u-url u-uid" href="https://www.maxwelljoslyn.com">Maxwell Joslyn</a>
+        <a rel="me" href="mailto:maxwelljoslyn@gmail.com"></a>
+    </div>
+    <nav class="cluster">
+        <a href="/index">Home</a>
+        <a href="/about">About</a>
+        <a href="/blog" rel="feed" type="text/html" title="Maxwell's Blog">Blog</a>
+        <a href="/tags">Tags</a>
+    </nav>
+</header>
+
+
+
+        
+<span class="login-status">
+
+<a class="muted" href="/login">Log In?</a>
+
+</span>
+
+        
+        <article class="center h-entry">
+
+            <h1 id="article-title" class="p-name"><a class="u-url" href="https://www.maxwelljoslyn.com/2022/03/14/1">
+
+Game Analytics and Procedural Content Generation Questions for a Gaming Company
+
+</a></h1>
+
+            
+
+
+<a rel="author" class="p-author" href="https://www.maxwelljoslyn.com" style="display: none;">Maxwell Joslyn</a>
+
+
+
+
+
+<span class="when-published">Published <a href="https://www.maxwelljoslyn.com/2022/03/14/1"><time class="dt-published" datetime="
+
+2022-03-14T14:15:21-0700
+
+">
+
+
+2022-03-14
+</time></a> at 
+14:15:21-0700
+
+
+</span>
+
+
+
+
+
+
+
+
+
+<div class="tags">Tags: <a class="p-category" href="/tags/gaming">gaming</a>, 
+    <a class="p-category" href="/tags/computing">computing</a>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            <div id="article-body" class="e-content ">
+                
+
+<p>I will soon be interviewing at CZ, a large company which develops casual mobile games in several genres, including slots, match-three, and word puzzles. The team I'm interviewing with is focused on procedural content generation and analytics/data science infrastructure.</p>
+<p>In pre-interview emails, the recruiter suggested I play some of CZ's games. I did so. Here are my thoughts and impressions.</p>
+<div class=muted>
+For purposes of professional courtesy, I have changed the name of the company and all games discussed in this article. Unfortunately, preserving CZ’s anonymity also means I cannot show screenshots.
+<p>I originally had another section in this post discussing ad placement and characteristics, but I removed it once I understood that the &quot;analytics&quot; side of this team is focused more on content analysis than ad performance. Email me if you want it.</p>
+</div>
+<h2>Choosing Games</h2>
+<p>I very much like word games (having originally trained as a linguist) and pattern recognition games. I also chose a couple games not in those categories to get a broader selection. The games I spent the most time on were
+Lathe Turner, Word Land, Hexagon Drop, and Color Squares.</p>
+<details>
+<summary>Lathe Turner</summary>
+<p>Lathe Turner consists of levels having three phases. In the first phase, the player is tasked with producing a target shape by moving their hand to carve bits of wood from a block, which rotates as if turning on a lathe. In the second phase, sandpaper is used to perfect the shape. In the third phase, paint is applied.</p>
+</details>
+<details>
+<summary>Color Squares</summary>
+<p>This game starts with a grid of empty square spaces, and three configurations of colored blocks. The player must place all three configurations of blocks somewhere on the board before being presented with three more. If three or more blocks of the same color are touching after a configuration is placed, all of those blocks will disappear. Gameplay continues until a configuration cannot be placed; there is no concept of discrete levels.</p>
+</details>
+<details>
+<summary>Hexagon Drop</summary>
+<p>Hexagon Drop, similarly to Color Squares, does not have levels, but is instead played to failure. Unlike Color Squares, it requires quick reflexes. A hexagon begins the game sitting atop a tower of irregularly-shaped blocks. Tapping a block destroys it, causing other blocks above to shift unpredictably thanks to a physics simulation. The goal is to prevent the hexagon from falling off either side of the tower, which is difficult because it can tilt and roll if blocks below are not carefully &quot;pruned&quot; so as to keep the surface below the hexagon flat. For me, not being especially deft with my fingers, each round of Hexagon Drop ends very quickly.</p>
+</details>
+<details>
+<summary>Word Land</summary>
+<p>I found this game the most enjoyable of all I tried. In each level of Word Land, and empty crossword is presented, as well as a list of letters. The player spells words using the list of letters. Word Land is simple and addictive, especially once I learned there are bonus points for spelling words that are not part of the expected list of crossword solutions, but which <em>do</em> match a hidden list of “obscure” words.</p>
+</details>
+<h2>Startup and Personal Data</h2>
+<p>All of the games I tried triggered the standard iPhone &quot;allow/disallow app to track you elsewhere&quot; dialogs, which I expect from most applications these days.</p>
+<p>I checked in the settings menu of each app and did not find any analytics-related toggles or opt-out buttons, but that's to be expected, given that analysis of player actions is crucial for generating challenges that match a given player's skill level and playstyle. It was nice to see that all the games I checked had a “request or delete personal data” button.</p>
+<h2>Analytics and Content Generation</h2>
+<p>I’m sure every CZ game is comprehensively instrumented with analytics, both for in-house game development and market research purposes, and for feedback to advertising partners about performance. In general, I imagine all player interactions in every game are stored, in order to analyze not just timing and frequency of events, but also sequences of events.</p>
+<p>In specific, I’d guess all of the level-based games I tried are tracking the length of time to complete a level, whether the player completed a level in one sitting, and how often the player buys bonuses or expansions. The timing-based games probably track how well the player is able to do before failing, both at their peak and on average. I also noticed that all of the games I played had some kind of indicator for how well the player had done relative to all the other players (such as accuracy of object created in Lathe Turner, or percentage of global players who completed a given level of Word Land.)</p>
+<h2>Questions</h2>
+<ol>
+<li><p>I believe neural networks are being used at CZ as part of data analytics pipelines. <strong>If data from a particular player were used as neural network training data, their data might &quot;live on&quot; even after a deletion request has been processed.</strong> Is it technically feasible to address this concern, such as by retraining networks on a periodic basis so that the data of deleted players does not remain in use?</p>
+</li>
+<li><p>There were a couple times where I spelled words that I’m sure are actual English, but were rejected by Word Land, even as bonus words. <strong>Has CZ considered adding a &quot;report word&quot; feature</strong> that would enable them to expand the vocabulary of this and other word-based games?</p>
+</li>
+<li><p><strong>How does CZ adapt games or otherwise learn lessons from analysis of player behavior?</strong> Let's consider how the Word Land level generator might take player behavior into account.</p>
+<ul>
+<li>If a player habitually spells short or long words, the level generator could filter the word corpus to give a distribution of words which matches the player's habits (for an easier level) or goes against it (for a harder one.)</li>
+<li>The number of times a player spells a word which they had already entered successfully could be a sign of frustration, aimlessness, or that they haven’t yet gotten in the habit of checking the list of words they’ve already spelled on this level. Future levels could offer words with more distinction between them (as measured by, say, edit distance) so it's harder to forget if you've played a particular word.</li>
+<li>If a player consistently guesses words from a large vocabulary, the level generator could continually expand the size of its corpus to offer more and more challenging words. On the other hand, a player who consistently plays words from a limited vocabulary could be given levels which draw from a similarly-limited corpus.</li>
+<li>If a player can quickly get the first N words per level, then struggles with the remaining words, further generated levels could reduce the maximum number of words per level to roughly N (with fewer than N words producing an easier level, and more than N, a harder level.)</li>
+<li>A player must tap and hold on a letter to start spelling a word; those taps could be checked to see whether that letter could possibly spell a word remaining in the level (including bonus words), to try and tell whether the player is floundering or thinking carefully. If a player keeps trying to spell words which couldn't possibly be in the level, or which couldn't fit on the board, the corpus for future levels could be adjusted to use words which the player has tried to spell on inappropriate levels.</li>
+<li>If a player enters words that are valid English, or which were used in previous levels, but which <em>aren't</em> part of the current level, level generation could deliberately prioritize those words for inclusion, to cater to the revealed characteristics of the player's vocabulary.</li>
+</ul>
+</li>
+<li><p>How do techniques used for content creation at CZ interact with strategies for monetization, including advertisements?</p>
+</li>
+</ol>
+<h2>After the Interview</h2>
+<p>Everything above was written before my interview; now I'm writing after it. My interviewer, Ms. W,  asked a bunch of questions to gauge how well I could think about PCG design considerations. One topic that came up which I hadn't thought about was ensuring that match-three game levels are playable and satisfying.</p>
+<p>For instance, suppose you had a match-three level which, due to the initial arrangement of pieces, completely cleared the game board after the player made a single move! That might be fun once in blue moon, but would quickly grow stale from a player's perspective, since it would remove the challenge aspect of the gameplay (which usually involves preventing the whole board from filling up with pieces, somewhat like Tetris.)</p>
+<p>From the other direction, a match-three game board with zero valid moves at the start of the game would offer no gameplay whatsoever, and a board which offered one valid move but which had zero valid moves thereafter would be just as bad.</p>
+<p>A match-three level generator must absolutely be constrained to prevent these types of &quot;degenerate&quot; game board from being shipped to players. Ms. W confirmed that these kinds of constraints -- and many more -- are being used at CZ to support a minimum standard of quality for their games.</p>
+
+
+
+                
+
+
+            </div>
+            
+        </article>
+
+        
+
+<div class="center" id="webmentions"></div>
+
+
+
+        <div class="center" id="webmentions"></div>
+
+        <script data-goatcounter="https://maxwelljoslyn.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+        <script type="text/javascript" src="//script.crazyegg.com/pages/scripts/0107/0720.js" async="async"></script>  
+
+
+        
+    </body>
+</html>
