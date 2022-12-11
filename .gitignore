@@ -1,2 +1,3 @@
 gunicorn.pid
 poetry.lock
+mjcom/static/
