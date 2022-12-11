@@ -1,3 +1,5 @@
 gunicorn.pid
 poetry.lock
 mjcom/static/
+*.db-shm
+*.db-wal
