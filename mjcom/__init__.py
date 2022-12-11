@@ -159,9 +159,11 @@ class Day:
 # DONE links on entry.html if X then X for X in published, updated, categories
 # DONE imp category pages using jsoneach approach, similar to old permalink redirect
 # DONE redirect tags -> categories
+# DONE move all static assets to test site static dir, and get them served
+# DONE reverse engineer header nav from mxjn.me
+# TODO get css into templates such that center, etc. work correctly
 # TODO reverse engineer drongo template from mxjn.me
 # TODO reverse engineer entry template from mxjn.me
-# TODO reverse engineer homepage nav from mxjn.me
 # TODO reverse engineer poem template from mxjn.me
 # TODO varying redirects like /td/interview/xyz (no s on interviews), /poem/xyz -> /poems/xyz, etc
 # LATER

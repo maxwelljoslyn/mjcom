@@ -2,21 +2,21 @@ $def with (permalink, entry)
 $var classes = ["h-entry"]
 
 $def category_link(text):
-    $ return f"<a href='/categories/{text}'>{text}</a>"
+    $ return f"<a href='/categories/{text}' class='p-category'>{text}</a>"
 
 $if entry.get("published"):
     $ published = entry.get("published")[0]
-    <p>Published on $month_name[published.month] $published.day, $published.year</p>
+    <div>Published on $month_name[published.month] $published.day, $published.year</div>
 $if entry.get("updated"):
     $ updated = entry.get("updated")[0]
-    <p>Last updated on $month_name[updated.month] $updated.day, $updated.year</p>
+    <div>Last updated on $month_name[updated.month] $updated.day, $updated.year</div>
 $if entry.get("category"):
     $ category = entry.get("category")
     $ category.sort()
     $ links = [category_link(c) for c in category]
-    <p>Categories: $:andlist(links, ", ")</p>
+    <div>Categories: $:andlist(links, ", ")</div>
 
-<details open="">
+<details>
 <summary>Debuggery</summary>
 <p><strong>Some fields hidden!</strong></p>
 <ul>
@@ -27,8 +27,6 @@ $for key, val in entry.items():
 </details>
 
 <a class=u-author href=/></a>
-<link rel=alternate type=application/diamond-types href=${permalink}.dt
-      title="versioned history of this document"/>
 
 $# note: some of my old stuff has an explicit "type" key on its resource, e.g. letters to h0p3 with type "letter"
 $ type = discover_post_type(entry)
@@ -60,58 +58,3 @@ $elif type == "rsvp":
     $ in_reply_to = entry["in-reply-to"][0]
     <p>RSVP <strong class=p-rsvp>$entry["rsvp"][0]</strong> to
     <a class=u-in-reply-to href=$in_reply_to>$in_reply_to</a></p>
-
-$#    <script type=module>
-$#     import { load, getBrowser, diamondMonaco, MicropubClient } from '/static/web.js'
-
-     $# const previewMarkdown = content => {
-         $# // XXX name = document.querySelector('#name input[type=text]').value
-         $# // XXX previewName.innerHTML = `<h1>$${name}</h1>`
-         $# if (content == '') {
-             $# previewContent.innerHTML = ''
-             $# return
-         $# }
-         $# let body = new FormData()
-         $# body.append('content', content)
-         $# fetch(
-             $# '/editor/preview/markdown',
-             $# {
-                 $# method: 'POST',
-                 $# body: body
-             $# }
-         $# ).then(response => {
-             $# if (response.status === 200) {
-                 $# return response.json().then(data => {
-                     $# previewContent.innerHTML = data['content']
-                 $# })
-             $# }
-         $# })
-     $# }
-$#
-     $# var frequency = 1.5;  // seconds
-     $# var count = 0;
-     $# var clean = true;
-     $# const tick = () => {
-         $# setTimeout(() => {
-             $# if (count++ > frequency * 10 && !clean)
-                 $# updatePreview();
-             $# tick();
-         $# }, 100);
-     $# }
-     $# tick();
-     $# const updatePreview = () => {
-         $# clean = false;
-         $# if (count > frequency * 10) {
-             $# previewMarkdown(monaco.getValue());
-             $# clean = true;
-             $# count = 0;
-         $# }
-     $# }
-$#
-     $# const monaco = diamondMonaco(
-         $# '$permalink', editor, editorStatus, connection, version,
-         $# {},
-         $# '$(tx.user.session["uid"][0] if tx.user.session else tx.user.ip)'
-     $# )
-     $# monaco.onDidChangeModelContent(updatePreview)
-    $# </script>

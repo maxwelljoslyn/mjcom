@@ -1,6 +1,5 @@
 $def with (resource)
 $ path = tx.request.uri.path
-$# owner = tx.host.owner
 
 <html>
 <head>
@@ -21,17 +20,28 @@ Maxwell Joslyn</title>
 </head>
 
 <body>
+<header class="cluster center">
+<div class="h-card">
+<a id="logo" rel="me" class="u-url u-uid" href="https://www.maxwelljoslyn.com">Maxwell Joslyn</a>
+<a rel="me" href="mailto:maxwelljoslyn@gmail.com"></a>
+</div>
+<nav class="cluster">
+<a href="/">Home</a>
+<a href="/about">About</a>
+<a href="/blog" rel="feed" type="text/html" title="Maxwell's Blog">Blog</a>
+<a href="/tags">Tags</a>
+</nav>
+</header>
 
+$ classes = resource.classes if ('classes' in resource) else []
+$ classes.append('center')
 
 <article id=content\
-$if "classes" in resource:
-     class="$' '.join(resource.classes)"\
+    class="$' '.join(classes)"\
 >
 
-<header>
 $if "title" in resource and getattr(resource, "show_title", True):
     <h1>$:resource.title</h1>
-</header>
 $:resource
 </article>
 
@@ -40,12 +50,9 @@ $if "aside" in resource:
     $:resource.aside()
     </aside>
 
-<nav>
 <div class=h-card>
 <div>
 <p><a href=/ class="p-name u-url u-uid"><big><strong>Maxwell Joslyn's Test Website</strong></big></a></p>
-<img src="/static/goblin.jpg" >
-$# <p>$tx.host.owner["note"][0]</p>
 </div>
 </div>
 
@@ -58,23 +65,6 @@ $for place, url in [("GitHub", "https://github.com/maxwelljoslyn"), ("Email", "m
 
 
 
-<!-- 
-     <body>
-     <header class="cluster center">
-     <div class="h-card">
-     <a id="logo" rel="me" class="u-url u-uid" href="https://www.maxwelljoslyn.com">Maxwell Joslyn</a>
-     <a rel="me" href="mailto:maxwelljoslyn@gmail.com"></a>
-     </div>
-     <nav class="cluster">
-     <a href="/index">Home</a>
-     <a href="/about">About</a>
-     <a href="/blog" rel="feed" type="text/html" title="Maxwell's Blog">Blog</a>
-     <a href="/tags">Tags</a>
-     </nav>
-     </header>
--->
-
-
 <ul>
 $for app_prefix, app_name in [("code", "Code"), ("media", "Media")]:
     <li>\
@@ -84,7 +74,8 @@ $for app_prefix, app_name in [("code", "Code"), ("media", "Media")]:
         <a href=/$app_prefix>$app_name</a>\
     </li>
 </ul>
-</nav>
+
+</div>
 
 </body>
 </html>
